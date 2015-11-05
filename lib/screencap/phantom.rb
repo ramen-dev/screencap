@@ -15,6 +15,10 @@ module Screencap
       raise Screencap::Error, "Could not load URL #{url}" if result.match /Unable to load/
     end
 
+    def self.puts(*args)
+      defined?(::Rails) ? Rails.logger.fatal(args.inspect) : super(*args)
+    end
+
     def quoted_args(args)
       args.map{|x| quoted_arg(x)}
     end
